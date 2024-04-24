@@ -42,30 +42,38 @@
   </head>
   <body>
     <header class="container-fluid">
-      <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
-        <div
-          class="col-12 col-lg-6 my-auto py-1 py-lg-0 text-center text-lg-left"
+      <div class="row ">
+        <nav class="navbar navbar-expand-lg w-100 d-flex mt-2 navbar-light">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#main-nav"
+            aria-controls="main-nav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="col-12 col-lg-1 my-auto py-1 py-lg-0"
         >
-          <a href="{% url 'home' %}" class="nav-link main-logo-link">
-            <img src="{{MEDIA_URL}} media/audiophile.svg" alt="logo" />
-          </a>
+        <a href="{% url 'home' %}" class="nav-link main-logo-link">
+          <img src="{{MEDIA_URL}} media/logo.svg" alt="logo" />
+        </a>
         </div>
-        <div class="col-12 col-lg-6 my-auto py-1 py-lg-0">
-          <ul class="list-inline list-unstyled text-center text-lg-right my-0 mr-3">
-            <li class="list-inline-item dropdown">
-              <a
-                class="text-black nav-link"
+        <div class="col-12 col-lg-9 my-auto py-1 py-lg-0">
+          {% include 'includes/desktop_nav.html' %}
+        </div>
+        <div class="col-12 col-lg-2 my-auto py-1 py-lg-0">
+            <div class="list-inline-item dropdown">
+              <button
+                class="nav-link rounded"
                 href="#"
                 id="user-options"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >
-                <div class="text-center">
-                  <div><i class="fas fa-user"></i></div>
-                  <p class="my-0 top1">My Account</p>
-                </div>
-              </a>
+              >ENTER</button>
               <div
                 class="dropdown-menu border-0"
                 aria-labelledby="user-options"
@@ -88,41 +96,9 @@
                 >
                 {% endif %}
               </div>
-            </li>
-            <li class="list-inline-item">
-              <a
-                class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link"
-                href="#"
-              >
-                <div class="text-center">
-                  <div><i class="fas fa-shopping-bag"></i></div>
-                  <p class="my-0 top1">
-                    {% if grand_total %} ${{ grand_total|floatformat:2 }} {% else %} $0.00 {% endif %}
-                  </p>
-                </div>
-              </a>
-            </li>
+            </div>
           </ul>
         </div>
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0"></div>
-      </div>
-      <div class="row">
-        <nav class="navbar navbar-expand-lg w-100">
-          <button
-            class="navbar-toggler custom-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#main-nav"
-            aria-controls="main-nav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a href="{% url 'home' %}" class="nav-link main-logo-link-mobile d-lg-none img-fluid">
-            <img src="{{MEDIA_URL}} media/audiophile.svg" alt="logo" />
-          </a>
-          {% include 'includes/mobile_nav.html' %} {% include 'includes/desktop_nav.html' %}
         </nav>
       </div>
     </header>

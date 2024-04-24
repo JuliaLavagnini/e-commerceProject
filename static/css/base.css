@@ -4,55 +4,9 @@ html {
 
 body{
     font-family: "Manrope", sans-serif;
-    color: #fff;
-    background-color: black;
 }
 
-ul .top1 {
-    font-size: 14px;
-}
 
-a {
-    color: #fff;
-}
 
-a:hover{
-    color:#9e9e9e ;
-}
 
-nav{
-    background-color: black;
 
-}
-
-.custom-toggler.navbar-toggler {
-    border-color: none;
-}
-/* Setting the stroke to green using rgb values (0, 128, 0) */
- 
-.custom-toggler .navbar-toggler-icon {
-    background-image: url(
-"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(252, 252, 252, 1)' stroke-width='4' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-}
-
-/* Show the mobile logo only on small screens */
-.main-logo-link-mobile {
-    display: none; /* Hide by default */
-}
-
-@media (max-width: 991.98px) {
-    .main-logo-link-mobile {
-        display: inline-block; /* Show on small screens */
-    }
-}
-
-/* Hide the desktop logo on small screens */
-.main-logo-link {
-    display: inline-block; /* Show by default */
-}
-
-@media (max-width: 991.98px) {
-    .main-logo-link {
-        display: none; /* Hide on small screens */
-    }
-}
