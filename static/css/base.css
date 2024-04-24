@@ -6,7 +6,33 @@ body{
     font-family: "Manrope", sans-serif;
 }
 
+.home-page {
+    background-image: url("/media/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg");
+    background-size: cover;
+    color: white;
+}
 
+h1{
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 55px;
+    letter-spacing: 1.5px;
+}
 
+.home-page button{
+    border: 1px solid rgb(250, 179, 46);
+    background-color: rgb(250, 179, 46);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 16px;
+}
 
+.home-page button:hover{
+    background-color: #b98420;
+    border: 1px solid #b98420;
+}
+
+.home-page{
+    padding: 200px 150px;
+}
 
