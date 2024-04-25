@@ -25,7 +25,7 @@
                         </select>
                     </div>
                     <p class="card-text price" id="price{{ plan.id }}" data-monthly-price="{{ plan.monthly_price }}">Price: ${{ plan.monthly_price }}</p>
-                    <a href="#" class="btn btn-dark">Subscribe</a>
+                    <a href="{% url 'checkout' %}?plan_id={{ plan.id }}&plan_name={{ plan.name }}&plan_price={{ plan.monthly_price }}&plan_type={{ plan.id }}" class="btn btn-dark">Select Plan</a>
                 </div>
             </div>
         </div>
