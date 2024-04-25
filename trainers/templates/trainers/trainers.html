@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% load static %} 
+
+{% block extra_title%} Our Trainers {% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <h2 class="my-4 font-weight-bolder" >Trainers Gallery</h2>
+  <div class="row">
+    {% for trainer in trainers %}
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card h-100">
+        <!-- Check if trainer has image_url -->
+        {% if trainer.image_url %}
+        <img class="card-img-top" src="{{ trainer.image_url }}" alt="{{ trainer.name }}" />
+        <!-- If not, check if trainer has image -->
+        {% elif trainer.image %}
+        <img class="card-img-top" src="{{ trainer.image.url }}" alt="{{ trainer.name }}" />
+        <!-- If neither image_url nor image is available, display a placeholder or message -->
+        {% else %}
+        <p>No image available</p>
+        {% endif %}
+
+        <div class="card-body">
+          <h4 class="card-title font-weight-bolder">{{ trainer.name }}</h4>
+          <a
+            href="{% url 'trainer_detail' trainer.id %}"
+            class="btn btn-secondary"
+            >View Details</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

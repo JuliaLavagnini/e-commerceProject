@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 django = "*"
 django-allauth = {extras = ["socialaccount"], version = "*"}
+pillow = "*"
 
 [dev-packages]
 

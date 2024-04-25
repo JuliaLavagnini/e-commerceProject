@@ -38,7 +38,7 @@
     ></script>
     {% endblock %} {% block extra_js %} {% endblock %}
 
-    <title>e-commerce website {% block extra_title%}{% endblock %}</title>
+    <title>{% block extra_title%}{% endblock %}</title>
   </head>
   <body>
     <header class="container-fluid">
@@ -58,7 +58,7 @@
           <div class="col-12 col-lg-1 my-auto py-1 py-lg-0"
         >
         <a href="{% url 'home' %}" class="nav-link main-logo-link">
-          <img src="{{MEDIA_URL}} media/logo.svg" alt="logo" />
+          <img src="/media/logo.svg" alt="logo" />
         </a>
         </div>
         <div class="col-12 col-lg-9 my-auto py-1 py-lg-0">
@@ -102,8 +102,7 @@
         </nav>
       </div>
     </header>
-    {% if messages %}
-    <div class="message-container"></div>
-    {% endif %} {% block page_header %} {% endblock %} {% block content %} {% endblock %} {% block postloadjs %} {% endblock %}
+    {% block content %} {% endblock %}
+   {% block postloadjs %} {% endblock %}
   </body>
 </html>

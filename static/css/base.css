@@ -36,3 +36,16 @@ h1{
     padding: 200px 150px;
 }
 
+.center-content {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+

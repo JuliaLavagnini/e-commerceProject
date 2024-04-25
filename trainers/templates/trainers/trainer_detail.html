@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block extra_title%} Trainers detail{% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-md-5">
+  <div class="row d-flex justify-content-around">
+      <div class="col-lg-6">
+          <div class="d-flex justify-content-center">
+              <img src="{% if trainer.image_url %}{{ trainer.image_url }}{% elif trainer.image %}{{ trainer.image.url }}{% endif %}" class="img-fluid" alt="{{ trainer.name }}" style="max-width: 500px; max-height: 500px;">
+          </div>
+      </div>
+      <div class="col-lg-6">
+          <div class="card">
+              <div class="card-body">
+                  <h1 class="card-title">{{ trainer.name }}</h1>
+
+                  <!-- Display trainer's program -->
+                  <p><strong>Program:</strong> {{ trainer.get_programs_display }}</p>
+
+                  <!-- Display trainer's availability -->
+                  <p><strong>Availability:</strong> {{ trainer.get_availability_display }}</p>
+
+                  <!-- Display trainer's speciality -->
+                  <p><strong>Speciality:</strong> {{ trainer.get_speciality_display }}</p>
+
+                  <!-- Display trainer's sessions time -->
+                  <p><strong>Sessions Time:</strong> {{ trainer.get_sessions_display }}</p>
+              </div>
+          </div>
+          <!-- Back button to return to trainers list -->
+          <a href="{% url 'trainers' %}" class="btn btn-outline-secondary mt-3" >Back to Trainers page</a>
+      </div>
+  </div>
+</div>
+
+{% endblock %} 
