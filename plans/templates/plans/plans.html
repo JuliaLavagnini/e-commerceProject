@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% load static %} {% load templatestags %}
+
+{% block extra_title%} Plans & Pricing {% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <h2>Plans <small>40% off with year plans</small></h2>
+    <div class="row">
+        {% for plan in plans %}
+        <div class="col-md-6">
+            <div class="card plans">
+                <div class="card-body">
+                    <h5 class="card-title">{{ plan.name }} </h5>
+                    <ul class="list-group card-text description">
+                        {% for item in plan.description|split_by_newline %}
+                            <li class="list-group-item">{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="form-group mt-2">
+                        <label for="duration{{ plan.id }}">Duration:</label>
+                        <select class="form-control" id="duration{{ plan.id }}" onchange="updatePrice('{{ plan.id }}')">
+                            <option value="monthly" selected>Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+                    <p class="card-text price" id="price{{ plan.id }}" data-monthly-price="{{ plan.monthly_price }}">Price: ${{ plan.monthly_price }}</p>
+                    <a href="#" class="btn btn-dark">Subscribe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function updatePrice(planId) {
+        let durationSelect = document.getElementById('duration' + planId);
+        let priceDisplay = document.getElementById('price' + planId);
+        let monthlyPrice = parseFloat(priceDisplay.dataset.monthlyPrice); // Extracting the price from the text
+        let yearlyPrice = (monthlyPrice * 12);
+        let discountedYearlyPrice = yearlyPrice * 0.6;
+
+        if (durationSelect.value === 'yearly') {
+            priceDisplay.innerText = 'Price: $' + discountedYearlyPrice.toFixed(2) + ' / year';
+        } else {
+            priceDisplay.innerText = 'Price: $' + monthlyPrice.toFixed(2) + ' / month';
+        }
+    }
+</script>
+{% endblock %}

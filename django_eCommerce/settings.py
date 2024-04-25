@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'eCommerce',
     'trainers',
+    'plans',
 ]
 
 MIDDLEWARE = [
