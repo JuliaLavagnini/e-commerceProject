@@ -4,9 +4,7 @@ from .models import Payment
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ('plan_name', 'plan_price', 'plan_duration',
-                  'country', 'postcode', 'town_or_city',
-                  'street_address1', 'street_address2', 'county',)
+        fields = ('plan_name', 'plan_price', 'plan_duration',)
     
     def __init__(self, *args, **kwargs):
         """
@@ -18,12 +16,6 @@ class PaymentForm(forms.ModelForm):
             'plan_name': 'Plan Name',
             'plan_price': 'Plan Price',
             'plan_duration': 'Plan Duration',
-            'country': 'Country',
-            'postcode': 'Postal Code',
-            'town_or_city': 'Town or City',
-            'street_address1': 'Street Address 1',
-            'street_address2': 'Street Address 2',
-            'county': 'County',
         }
 
         self.fields['plan_name'].widget.attrs['autofocus'] = True
