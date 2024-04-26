@@ -7,7 +7,7 @@ name = "pypi"
 django = "*"
 django-allauth = {extras = ["socialaccount"], version = "*"}
 pillow = "*"
-django-crispy-forms = "==1.14.0"
+django-crispy-forms = "*"
 
 [dev-packages]
 
