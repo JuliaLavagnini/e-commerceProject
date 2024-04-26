@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% load static %} {% load templatestags %}
+
+{% block extra_title%} Checkout Success {% endblock %}
+
+{% block content %}
+
+    <h1>Thank You for Your Purchase!</h1>
+    <h2>Receipt</h2>
+    <p>Plan Name: {{ plan_name }}</p>
+    <p>Plan Price: ${{ plan_price }}</p>
+    <p>Plan Duration: {{ plan_duration }}</p>
+    <p>Payment Date: {{ payment_date }}</p>
+
+{% endblock %}

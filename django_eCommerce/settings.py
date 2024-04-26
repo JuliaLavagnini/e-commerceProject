@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'eCommerce',
     'trainers',
     'plans',
-    'checkout'
+    'checkout',
 ]
 
 MIDDLEWARE = [

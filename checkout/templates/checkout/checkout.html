@@ -1,13 +1,71 @@
 {% extends "base.html" %} {% load static %} {% load templatestags %}
-
 {% block extra_title%} Checkout {% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
 {% block content %}
+<div class="overlay"></div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <hr>
+            <h2 class="logo-font mb-4">Checkout</h2> <!-- Title -->
+            <hr>
+        </div>
+    </div>
 
-<h2>Checkout</h2>
-<p>Plan: {{ plan_name }}</p>
-<p>Price: ${{ plan_price }}</p>
-
+    <div class="row">
+        <div class="col-12 col-lg-6 order-lg-last mb-5">
+            <p class="text-muted">Order Summary</p> <!-- Order Summary -->
+            <div class="row">
+                <div class="col-2 mb-1">
+                    <!-- Display plan image if available -->
+                </div>
+                <div class="col-7">
+                    <h3 class="my-0"><strong>{{ form.plan_name.value }}</strong></h3> <!-- Plan Name -->
+                    <p class="my-0 small">Duration: {{ form.plan_duration.value }}</p> <!-- Plan Duration -->
+                    <p class="my-0 small text-muted">Price: {{ form.plan_price.value }}</p> <!-- Plan Price -->
+                </div>
+            </div>
+            <hr class="my-0">
+        </div>
+        <div class="col-12 col-lg-6">
+            <p class="text-muted">Please fill out the form below to complete your order</p> <!-- Form Instructions -->
+            <form method="POST" id="payment-form">
+                {% csrf_token %}
+                <div class="submit-button text-right mt-5 mb-2">                    
+                    <a href="{% url 'plans' %}" class="btn btn-outline-black rounded-0">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span class="font-weight-bold">Back to plans</span>
+                    </a>
+                    <button type="submit" id="submit-button" class="btn btn-black rounded-0">
+                        <span class="font-weight-bold">Complete Order</span>
+                        <span class="icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </button>
+                    <p class="small text-danger my-0">
+                        <span class="icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </span>
+                        <span>Your card will be charged <strong>${{ form.plan_price.value }}</strong></span> <!-- Payment Information -->
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="loading-overlay">
+    <h1 class="text-light logo-font loading-spinner">
+        <span class="icon">
+            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+        </span>
+    </h1>
+</div>
 
 
 {% endblock %}
