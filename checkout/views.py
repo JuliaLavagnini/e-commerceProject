@@ -6,7 +6,6 @@ def checkout(request):
     plan_id = request.GET.get('plan_id')
     plan_name = request.GET.get('plan_name')
     plan_price = request.GET.get('plan_price')
-    plan_type = request.GET.get('plan_type')
     
     context = {
         'plan_name': plan_name,
