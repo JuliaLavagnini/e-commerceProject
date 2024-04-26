@@ -31,7 +31,13 @@ def checkout(request):
             'plan_price': plan_price,
             'plan_duration': plan_duration
         })
-    return render(request, 'checkout/checkout.html', {'form': form})
+
+        context = {
+            'form': form,
+            'stripe_public_key': 'pk_test_51P9xwZHvKRR9IWdakeWyNYtsqIITfdUSxn1cSVIkNCDvuXnC0A64sTIi8gfegVlg6D77zA4NGbOGnvGNZq7JHOij00RhMVWRSI',
+            'client_secret': 'test',
+        }
+    return render(request, 'checkout/checkout.html', context)
 
 def checkout_success(request):
     # You can render a success page here
