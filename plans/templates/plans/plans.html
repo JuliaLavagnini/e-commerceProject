@@ -34,22 +34,4 @@
     </div>
 </div>
 
-<script>
-    function updatePrice(planId) {
-        let durationSelect = document.getElementById('duration' + planId);
-        let monthlyPriceDisplay = document.getElementById('monthly-price' + planId);
-        let yearlyPriceDisplay = document.getElementById('yearly-price' + planId);
-        let monthlyPrice = parseFloat(monthlyPriceDisplay.dataset.monthlyPrice);
-        let yearlyPrice = parseFloat(yearlyPriceDisplay.dataset.yearlyPrice);
-
-        if (durationSelect.value === 'yearly') {
-            monthlyPriceDisplay.style.display = 'none';
-            yearlyPriceDisplay.style.display = 'block';
-        } else {
-            monthlyPriceDisplay.style.display = 'block';
-            yearlyPriceDisplay.style.display = 'none';
-        }
-    }
-</script>
-
 {% endblock %}
