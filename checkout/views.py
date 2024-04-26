@@ -14,19 +14,23 @@ def checkout(request):
             # Redirect to a success page or another view
             return redirect('checkout_success')
     else:
-        # Extract plan details from query parameters
+        # Check if plan details are passed in the query parameters
         plan_id = request.GET.get('plan_id')
         plan_name = request.GET.get('plan_name')
         plan_price = request.GET.get('plan_price')
         plan_duration = request.GET.get('plan_duration')
-        # Check if a plan ID is provided in the query parameters
-        plan_id = request.GET.get('plan_id')
-        if not plan_id:
-            # Display an error message and redirect the user back to the plans page
+
+        # If plan details are not provided, display an error message and redirect
+        if not (plan_id and plan_name and plan_price and plan_duration):
             messages.error(request, 'Error: Please select a plan and try again.')
             return redirect('plans')
         
-        form = PaymentForm(initial={'plan_name': plan_name, 'plan_price': plan_price})
+        # Initialize the payment form with the plan details
+        form = PaymentForm(initial={
+            'plan_name': plan_name,
+            'plan_price': plan_price,
+            'plan_duration': plan_duration
+        })
     return render(request, 'checkout/checkout.html', {'form': form})
 
 def checkout_success(request):
