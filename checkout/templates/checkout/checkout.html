@@ -1,4 +1,13 @@
+{% extends "base.html" %} {% load static %} {% load templatestags %}
+
+{% block extra_title%} Checkout {% endblock %}
+
+{% block content %}
+
 <h2>Checkout</h2>
 <p>Plan: {{ plan_name }}</p>
 <p>Price: ${{ plan_price }}</p>
-<p>Type: {{ plan_id }}</p>
+
+
+
+{% endblock %}
