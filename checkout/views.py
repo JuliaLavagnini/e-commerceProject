@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import PaymentForm
 from .models import Payment
+from django.conf import settings
+
+import stripe
+
 
 def checkout(request):
     if request.method == 'POST':
@@ -20,22 +24,17 @@ def checkout(request):
         plan_price = request.GET.get('plan_price')
         plan_duration = request.GET.get('plan_duration')
 
-        # If plan details are not provided, display an error message and redirect
-        if not (plan_id and plan_name and plan_price and plan_duration):
+        # Check if a plan ID is provided in the query parameters
+        plan_id = request.GET.get('plan_id')
+        if not plan_id:
+            # Display an error message and redirect the user back to the plans page
             messages.error(request, 'Error: Please select a plan and try again.')
             return redirect('plans')
         
-        # Initialize the payment form with the plan details
-        form = PaymentForm(initial={
-            'plan_name': plan_name,
-            'plan_price': plan_price,
-            'plan_duration': plan_duration
-        })
-
+        form = PaymentForm(initial={'plan_name': plan_name, 'plan_price': plan_price})
         context = {
-            'form': form,
-            'stripe_public_key': 'pk_test_51P9xwZHvKRR9IWdakeWyNYtsqIITfdUSxn1cSVIkNCDvuXnC0A64sTIi8gfegVlg6D77zA4NGbOGnvGNZq7JHOij00RhMVWRSI',
-            'client_secret': 'test',
+            'form' : form,
+            'stripe_public_key' : settings.STRIPE_PUBLIC_KEY,
         }
     return render(request, 'checkout/checkout.html', context)
 

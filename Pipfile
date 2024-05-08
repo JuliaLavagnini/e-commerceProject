@@ -8,6 +8,9 @@ django = "*"
 django-allauth = {extras = ["socialaccount"], version = "*"}
 pillow = "*"
 django-crispy-forms = "*"
+stripe = "*"
+python-dotenv = "*"
+python-decouple = "==3.6"
 
 [dev-packages]
 

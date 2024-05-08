@@ -2,10 +2,6 @@ html {
     height: 100%;
 }
 
-body{
-    font-family: "Manrope", sans-serif;
-}
-
 .home-page {
     background-image: url("/media/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg");
     background-size: cover;

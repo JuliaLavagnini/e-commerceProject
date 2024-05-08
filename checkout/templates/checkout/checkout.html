@@ -11,73 +11,54 @@
 {% block content %}
     <div class="overlay"></div>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="logo-font mb-4">Checkout</h2> <!-- Title -->
-                <hr>
-            </div>
-        </div>
+        <a href="{% url 'plans' %}" class="btn btn-outline-black rounded-0 mt-5 mb-2">
+            <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+            <span class="font-weight-bold">Back to plans</span>
+        </a>
+        <hr class="my-0 mb-5">
 
-        <div class="row">
-            <div class="col-12 col-lg-6 order-lg-last mb-5">
-                <p class="text-muted">Order Summary</p> <!-- Order Summary -->
-                <div class="row">
-                    <div class="col-12">
-                        <h3 class="my-0"><strong>{{ form.plan_name.value }}</strong></h3> <!-- Plan Name -->
-                        <p class="my-0 small" style="font-weight: 700;">Duration: {{ form.plan_duration.value }}</p> <!-- Plan Duration -->
-                        <p class="my-0 text-muted" style="font-weight: 700;">Price: {{ form.plan_price.value }}</p> <!-- Plan Price -->
-                    </div>
-                </div>
-                <hr class="my-0">
-            </div>
-            <div class="col-12 col-lg-6">
-                <p class="text-muted">Please fill out the form below to complete your order</p> <!-- Form Instructions -->
-                <form method="POST" id="payment-form" action="{% url 'checkout' %}">
-                    {% csrf_token %}
-                    <fieldset class="rounded px-3 mb-5">
-                        <div class="form-check-label">
-                            {% if user.is_authenticated %}
-                               <p class="my-0 small text-muted" style="font-weight:lighter;">{{ request.user.username }} | {{ request.user.email }}</p>
-                            {% else %}
-                                <label for="">
-                                    <a href="{% url 'account_signup' %}" class="text-info">Create an account</a> or
-                                    <a href="{% url 'account_login' %}" class="text-info">Login</a>
-                                </label>
-                            {% endif %}
-                        </div>
-                    </fieldset>
-                    <fieldset class="px-3">
-                        <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                        <!-- A Stripe card element will go here -->
-                        <div class="mb-3" id="card-element"></div>
-                        <!-- Used to display form errors -->
-                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-                        <!-- Pass the client secret to the view so we can get the payment intent id -->
-                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                    </fieldset>
-                    <div class="submit-button text-right mt-5 mb-2">                    
-                        <a href="{% url 'plans' %}" class="btn btn-outline-black rounded-0">
-                            <span class="icon">
-                                <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="font-weight-bold">Back to plans</span>
-                        </a>
-                        <button type="submit" id="submit-button" class="btn btn-black rounded-0">
-                            <span class="font-weight-bold">Complete Order</span>
-                            <span class="icon">
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </button>
-                        <p class="small text-danger my-0">
-                            <span class="icon">
-                                <i class="fas fa-exclamation-circle"></i>
-                            </span>
-                            <span>Your card will be charged <strong>${{ form.plan_price.value }}</strong></span> <!-- Payment Information -->
-                        </p>
-                    </div>
-                </form>
-            </div>
+        <div class="col-12">
+            <form method="POST" id="payment-form" action="{% url 'checkout' %}">
+                {% csrf_token %}
+                    {% if user.is_authenticated %}
+                        <div class="card mx-5 shadow rounded" style="border-radius:50px;border:none">
+                            <div class="card-body">
+                                <h3 class="card-title font-weight-bold">Checkout</h3>
+                                <p class="text-muted small ">Enter card details.  Your subscription will start immediately</p>
+                                <div class="row">
+                                    <div class="col-6 text-muted">
+                                        <p class="my-0 mb-2"> Plan:</p> <!-- Plan Name -->
+                                        <p class="my-0">Total:</p> <!-- Plan Price -->
+                                    </div>
+                                    <div class="col-6 text-right font-weight-bold">
+                                        <h5 class="my-0 mb-2"> {{ form.plan_name.value }}</h5> <!-- Plan Name -->
+                                        <h5 class="my-0"> £ {{ form.plan_price.value }} / {{ form.plan_duration.value }}</h5> <!-- Plan Price and duration -->
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <div id="card-element" class="mb-3">
+                                        <!-- Elements will create input elements here -->
+                                    </div>
+                                    <!-- We'll put the error messages in this element -->
+                                    <div id="card-errors" role="alert"></div>
+                                    <button id="submit" type="submit" class=" btn btn-primary w-100">
+                                        <span id="button-text">Subscribe</span>
+                                        <span class="icon">
+                                            <i class="fas fa-lock"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>        
+                    {% else %}
+                        <label for="">
+                            <a href="{% url 'account_signup' %}" class="text-info">Create an account</a> or
+                            <a href="{% url 'account_login' %}" class="text-info">Login</a>
+                        </label>
+                    {% endif %}
+            </form>
         </div>
     </div>
 
@@ -86,6 +67,5 @@
 {% block postloadjs %} 
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
