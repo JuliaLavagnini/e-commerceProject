@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.contrib import messages
 from .forms import PaymentForm
 from .models import Payment
@@ -24,6 +26,12 @@ def checkout(request):
         plan_price = request.GET.get('plan_price')
         plan_duration = request.GET.get('plan_duration')
 
+            # Check if plan details are provided in the query parameters
+        if not (plan_id and plan_name and plan_price and plan_duration):
+            # Redirect to plans page with an error message if plan details are missing
+            return HttpResponseRedirect(reverse('plans') + '?error=Plan details missing')
+
+
         # Check if a plan ID is provided in the query parameters
         plan_id = request.GET.get('plan_id')
         if not plan_id:
@@ -31,7 +39,7 @@ def checkout(request):
             messages.error(request, 'Error: Please select a plan and try again.')
             return redirect('plans')
         
-        form = PaymentForm(initial={'plan_name': plan_name, 'plan_price': plan_price})
+        form = PaymentForm(initial={'plan_name': plan_name, 'plan_price': plan_price, 'plan_duration' : plan_duration})
         context = {
             'form' : form,
             'stripe_public_key' : settings.STRIPE_PUBLIC_KEY,

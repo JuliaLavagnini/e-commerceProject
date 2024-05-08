@@ -17,13 +17,3 @@ class PaymentForm(forms.ModelForm):
             'plan_price': 'Plan Price',
             'plan_duration': 'Plan Duration',
         }
-
-        self.fields['plan_name'].widget.attrs['autofocus'] = True
-        for field in self.fields:
-            if self.fields[field].required:
-                placeholder = f'{placeholders[field]} *'
-            else:
-                placeholder = placeholders[field]
-            self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
-            self.fields[field].label = False
