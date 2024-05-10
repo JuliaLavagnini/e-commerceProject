@@ -1,0 +1,43 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block extra_title%} Profile {% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static '' %}">
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2 class="logo-font mb-4">My Profile</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 >{{ user_info.username }}</h3>
+                <p>{{ user_info.email }}</p>
+                <button class="btn btn-dark text-uppercase float-center">Edit Details</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <h2>Purchase History</h2>
+                <ul>
+                    {% for purchase in purchase_history %}
+                    <li>{{ purchase.plan_name }} - {{ purchase.plan_price }} - {{ purchase.purchase_date }}</li>
+                    {% empty %}
+                    <li>No purchase history found.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

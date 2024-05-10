@@ -11,6 +11,7 @@ django-crispy-forms = "*"
 stripe = "*"
 python-dotenv = "*"
 python-decouple = "==3.6"
+django-countries = "*"
 
 [dev-packages]
 
