@@ -2,11 +2,12 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
 
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     plan_name = models.CharField(max_length=100)
-    plan_price = models.DecimalField(max_digits=10, decimal_places=2)
+    plan_price = models.IntegerField()
     plan_duration = models.CharField(max_length=20)
     payment_date = models.DateTimeField(default=timezone.now)
     payment_reference = models.CharField(max_length=32, null=False, editable=False)
@@ -30,9 +31,10 @@ class Payment(models.Model):
         return f"Payment #{self.payment_reference} - {self.user.username} - {self.plan_name}"
 
 class PurchaseHistory(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     plan_name = models.CharField(max_length=100)
-    plan_price = models.DecimalField(max_digits=10, decimal_places=2)
+    plan_price = models.IntegerField()
     plan_duration = models.CharField(max_length=20)
     purchase_date = models.DateTimeField(default=timezone.now)
 

@@ -35,6 +35,9 @@
                                     <div class="col-6 text-right font-weight-bold">
                                         <h5 class="my-0 mb-2"> {{ form.plan_name.value }}</h5> <!-- Plan Name -->
                                         <h5 class="my-0"> £ {{ form.plan_price.value }} /{{ form.plan_duration.value }}</h5> <!-- Plan Price and duration -->
+                                        <input type="hidden" id="plan_name" value="{{ form.plan_name.value }}">
+                                        <input type="hidden" id="plan_price" value="{{ form.plan_price.value }}">
+                                        <input type="hidden" id="plan_duration" value="{{ form.plan_duration.value }}">
                                     </div>
                                 </div>
                                 <br>
@@ -45,10 +48,10 @@
                                     <!-- We'll put the error messages in this element -->
                                     <div id="card-errors" role="alert"></div>
                                     <button id="submit" type="submit" class=" btn btn-primary w-100">
+                                        <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
                                         <span id="button-text">Subscribe</span>
-                                        <span class="icon">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
                                     </button>
                                 </div>
                             </div>        

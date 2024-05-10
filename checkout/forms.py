@@ -17,3 +17,4 @@ class PaymentForm(forms.ModelForm):
             'plan_price': 'Plan Price',
             'plan_duration': 'Plan Duration',
         }
+
