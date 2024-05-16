@@ -14,6 +14,8 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def checkout(request):
+    stripe_public_view = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_view = settings.STRIPE_SECRET_KEY
     if request.method == 'POST':
         form = PaymentForm(request.POST)
         if form.is_valid():
@@ -41,10 +43,24 @@ def checkout(request):
             return redirect('plans')
         
         form = PaymentForm(initial={'plan_name': plan_name, 'plan_price': plan_price, 'plan_duration' : plan_duration})
+
+        price = int(plan_price)
+        stripe_total = round(price * 100)
+        stripe.api_key = stripe_secret_view
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
+
+        print(intent)
+
+    if not stripe_public_view:
+        messages.warning(request, 'Stripe public key is missing. \ Did you forget to set it in your enviroment?')
         
     context = {
         'form' : form,
         'stripe_public_key' : settings.STRIPE_PUBLIC_KEY,
+        'client_secret' : intent.client_secret,
     }
     return render(request, 'checkout/checkout.html', context)
 
@@ -61,21 +77,3 @@ def checkout_success(request):
 def checkout_error(request):
     return render(request, 'checkout/includes/checkout_error.html')
 
-class StripePaymentView(View):
-    def post(self, request, *args, **kwargs):
-        try:
-            plan_id = request.POST.get('plan_id')
-            plan = Plan.objects.get(pk=plan_id)
-            amount = plan.plan_price * 100  # Convert to pennies
-
-            # Continue with payment processing...
-            # This part depends on your payment processing logic using Stripe
-
-            return redirect('checkout_success')
-
-        except Plan.DoesNotExist:
-            return JsonResponse({'success': False, 'message': 'Invalid plan'})
-
-        except Exception as e:
-            return JsonResponse({'success': False, 'message': str(e)})
-        

@@ -1,4 +1,7 @@
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+var clientSecret = $('#id_client_secret').text().slice(1, -1);
+console.log(clientSecret);
+console.log(stripePublicKey);
 var stripe = Stripe(stripePublicKey);
 document.querySelector("button").disabled = true;
 
@@ -41,71 +44,33 @@ if (document.getElementById('card-element')) {
     });
 }
 
-// Function to display error message
-function displayError(event) {
-    let displayError = document.getElementById('card-errors');
-    if (event.error) {
-        displayError.textContent = event.error.message;
-    } else {
-        displayError.textContent = '';
-    }
-}
+// Handle form submit
+var form = document.getElementById('payment-form');
 
-// Import Stripe.js library
-import { loadStripe } from '@stripe/stripe-js';
-
-// Initialize Stripe.js with publishable key
-const stripePromise = loadStripe(stripePublicKey);
-
-document.addEventListener('DOMContentLoaded', () => {
-    const paymentForm = document.getElementById('payment-form');
-    
-    paymentForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const stripe = await stripePromise;
-
-        // Collect form data
-        const formData = new FormData(paymentForm);
-        const planId = formData.get('plan_id');
-        const csrfToken = formData.get('csrfmiddlewaretoken');
-
-        // Make AJAX request to create PaymentIntent
-        const response = await fetch('/create_payment_intent/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken,
-            },
-            body: JSON.stringify({ plan_id: planId }),
-        });
-
-        const data = await response.json();
-
-        // Handle response from server
-        if (data.client_secret) {
-            // Use client_secret to confirm the payment
-            const result = await stripe.confirmCardPayment(data.client_secret, {
-                payment_method: {
-                    card: cardElement,
-                    billing_details: {
-                        name: formData.get('cardholder_name'),
-                    },
-                },
-            });
-
-            // Handle payment result
+form.addEventListener('submit', function(ev) {
+    ev.preventDefault();
+    card.update({ 'disabled': true});
+    $('#submit-button').attr('disabled', true);
+    stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+            card: card,
+         }
+    }).then(function(result) {
             if (result.error) {
-                // Display error to user
-                console.error(result.error.message);
+                var errorDiv = document.getElementById('card-errors');
+                var html = `
+                    <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                    </span>
+                    <span>${result.error.message}</span>`;
+                $(errorDiv).html(html);
+                $('#payment-form').fadeToggle(100);
+                card.update({ 'disabled': false});
+                $('#submit-button').attr('disabled', false);
             } else {
-                // Payment successful
-                console.log('Payment successful:', result.paymentIntent);
-                // Redirect to success page or perform other actions
+                if (result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
             }
-        } else {
-            // Error occurred or client_secret not received
-            console.error('Error:', data.message);
-        }
-    });
+        });
 });
