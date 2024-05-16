@@ -10,7 +10,7 @@
 
 {% block content %}
     <div class="overlay"></div>
-    <div class="container">
+    <div class="container mb-2">
         <a href="{% url 'plans' %}" class="btn btn-outline-black rounded-0 mt-5 mb-2">
             <span class="icon">
                 <i class="fas fa-chevron-left"></i>
@@ -18,7 +18,6 @@
             <span class="font-weight-bold">Back to plans</span>
         </a>
         <hr class="my-0 mb-5">
-
         <div class="col-12">
             <form method="POST" id="payment-form" action="{% url 'checkout' %}">
                 {% csrf_token %}
@@ -42,6 +41,7 @@
                                 </div>
                                 <br>
                                 <div>
+                                    {% crispy form %}
                                     <div id="card-element" class="mb-3">
                                         <!-- Elements will create input elements here -->
                                     </div>
@@ -65,6 +65,7 @@
                     {% endif %}
             </form>
         </div>
+        <div class="row"></div>
     </div>
 
 {% endblock %}

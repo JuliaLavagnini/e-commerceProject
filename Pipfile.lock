@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "69ef49c71498a9d3afd13c0b34a22addb08d8b2e776b2a2698c274cbe0a6f6e6"
+            "sha256": "52b2b8f3e69b0cfff4d7aea6639e2604a307470904e1e23c1255004ce335aa3b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -186,6 +186,15 @@
             "markers": "python_full_version >= '3.7.0'",
             "version": "==3.3.2"
         },
+        "crispy-bootstrap4": {
+            "hashes": [
+                "sha256:208673bf6a25892a656971af7a00e18ba2f7f06cd4a0d667923bd6134e64d276",
+                "sha256:46cf98777a28621d240bf71eb36d4a26ff86e9e19be1cfd822645f4043d18c31"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==2024.1"
+        },
         "cryptography": {
             "hashes": [
                 "sha256:02c0eee2d7133bdbbc5e24441258d5d2244beb31da5ed19fbb80315f4bbbff55",
@@ -237,10 +246,10 @@
                 "socialaccount"
             ],
             "hashes": [
-                "sha256:6f33e86e42fb78ec2885ee905f337b87c46465ae7fe162c4959dcac81d47e2ad"
+                "sha256:fbe0148c6258eac44e701a8f36e0950b5d0b1c60bde3e178683a4239f49311fc"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==0.62.1"
+            "version": "==0.63.0"
         },
         "django-countries": {
             "hashes": [

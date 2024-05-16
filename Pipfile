@@ -12,6 +12,7 @@ stripe = "*"
 python-dotenv = "*"
 python-decouple = "==3.6"
 django-countries = "*"
+crispy-bootstrap4 = "*"
 
 [dev-packages]
 

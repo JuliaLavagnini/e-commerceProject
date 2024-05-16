@@ -10,6 +10,5 @@ class PaymentAdmin(admin.ModelAdmin):
 class PurchaseHistoryAdmin(admin.ModelAdmin):
     list_display = ('user', 'plan_name', 'plan_price', 'plan_duration', 'purchase_date')
 
-
 admin.site.register(Payment, PaymentAdmin)
 admin.site.register(PurchaseHistory, PurchaseHistoryAdmin)

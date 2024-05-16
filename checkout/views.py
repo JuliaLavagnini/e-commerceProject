@@ -17,8 +17,17 @@ def checkout(request):
     stripe_public_view = settings.STRIPE_PUBLIC_KEY
     stripe_secret_view = settings.STRIPE_SECRET_KEY
     if request.method == 'POST':
-        form = PaymentForm(request.POST)
-        if form.is_valid():
+        form_data = {
+            'country': request.POST['country'],
+            'postcode': request.POST['postcode'],
+            'town_or_city': request.POST['town_or_city'],
+            'street_address1': request.POST['street_address1'],
+            'street_address2': request.POST['street_address2'],
+            'county': request.POST['county'],
+        }
+        payment_form = PaymentForm(form_data)
+
+        if payment_form.is_valid():
             # Process the form data and save it to the database
             payment = form.save(commit=False)
             payment.user = request.user  # Assuming you have authentication set up
