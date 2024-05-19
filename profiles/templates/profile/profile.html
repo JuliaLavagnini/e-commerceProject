@@ -19,25 +19,53 @@
         </div>
         <div class="row">
             <div class="col-12 text-center">
-                <h3 >{{ user_info.username }}</h3>
-                <p>{{ user_info.email }}</p>
-                <button class="btn btn-dark text-uppercase float-center">Edit Details</button>
+                <h3 >{{ user.username }}</h3>
+                <p>{{ user.email }}</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    {% crispy form %}
+                    <button type="submit" class="btn btn-dark text-uppercase float-center">Edit Details</button>
+                  </form>
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-12 col-lg-6">
                 <h2>Purchase History</h2>
-                <ul>
-                    {% for purchase in purchase_history %}
-                    <li>{{ purchase.plan_name }} - {{ purchase.plan_price }} - {{ purchase.purchase_date }}</li>
-                    {% empty %}
-                    <li>No purchase history found.</li>
-                    {% endfor %}
-                </ul>
+            </div>
+            <div class="col-12 col-lg-6">
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Plan Name</th>
+                        <th>Price</th>
+                        <th>Duration</th>
+                        <th>Purchase Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for payment in payments %}
+                        <tr>
+                          <td>{{ payment.plan_name }}</td>
+                          <td>{{ payment.price }}</td>
+                          <td>{{ payment.duration }}</td>
+                          <td>{{ payment.purchase_date }}</td>
+                        </tr>
+                      {% empty %}
+                        <tr>
+                          <td colspan="4">No payment history found.</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
+{% endblock %}
+
+{% block postloadjs %} 
+    {{ block.super }}
+    <script src="{% static 'checkout/js/profile.js' %}"></script>
 {% endblock %}
