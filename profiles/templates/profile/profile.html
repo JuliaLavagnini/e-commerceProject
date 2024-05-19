@@ -4,7 +4,7 @@
 {% block extra_title%} Profile {% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static '' %}">
+    <link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -29,35 +29,28 @@
             </div>
         </div>
         <hr>
+        <h2>Purchase History</h2>
         <div class="row">
-            <div class="col-12 col-lg-6">
-                <h2>Purchase History</h2>
-            </div>
-            <div class="col-12 col-lg-6">
-                <table>
-                    <thead>
-                      <tr>
-                        <th>Plan Name</th>
-                        <th>Price</th>
-                        <th>Duration</th>
-                        <th>Purchase Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for payment in payments %}
-                        <tr>
-                          <td>{{ payment.plan_name }}</td>
-                          <td>{{ payment.price }}</td>
-                          <td>{{ payment.duration }}</td>
-                          <td>{{ payment.purchase_date }}</td>
-                        </tr>
-                      {% empty %}
-                        <tr>
-                          <td colspan="4">No payment history found.</td>
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                </table>
+            <div class="col-6 col-lg-6 mt-3">
+                {% for payment in payments %}
+                <div class="card">
+                    <div class="card-header">
+                        <h3># {{ payment.payment_reference }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Plan:</strong> {{ payment.plan_name }}</p>
+                        <p><strong>Price:</strong> {{ payment.plan_price }}</p>
+                        <p><strong>Duration:</strong> {{ payment.plan_duration }}</p>
+                        <p><strong>Purchase Date:</strong> {{ payment.payment_date }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="card">
+                    <div class="card-body">
+                        <p>No payment history found.</p>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
