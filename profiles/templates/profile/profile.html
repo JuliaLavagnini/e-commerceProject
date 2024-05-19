@@ -18,15 +18,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 text-center">
-                <h3 >{{ user.username }}</h3>
-                <p>{{ user.email }}</p>
-                <form method="POST">
-                    {% csrf_token %}
-                    {% crispy form %}
-                    <button type="submit" class="btn btn-dark text-uppercase float-center">Edit Details</button>
-                  </form>
+          <div class="col-12 text-center">
+            <h3 >{{ user.username }}</h3>
+            <p>{{ user.email }}</p>
+            <button id="edit-details-btn" class="btn btn-dark text-uppercase float-center">Edit Details</button>
+
+            <div id="form-container" class="mt-4" style="display: none;">
+              <form method="POST">
+                {% csrf_token %}
+                {% crispy form %}
+                <button type="submit" class="btn btn-dark text-uppercase float-center">Save Changes</button>
+              </form>
             </div>
+          </div>
         </div>
         <hr>
         <h2>Purchase History</h2>
@@ -60,5 +64,5 @@
 
 {% block postloadjs %} 
     {{ block.super }}
-    <script src="{% static 'checkout/js/profile.js' %}"></script>
+    <script src="{% static 'profile/js/profile.js' %}"></script>
 {% endblock %}
