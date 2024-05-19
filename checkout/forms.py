@@ -4,11 +4,11 @@ from crispy_forms.layout import Layout, HTML, Row, Column
 from crispy_forms.helper import FormHelper
 
 class PaymentForm(forms.ModelForm):
-    email = forms.EmailField(disabled=True)  # Add the email field and disable it to make it read-only
+    email = forms.EmailField(disabled=False)
 
     class Meta:
         model = Payment
-        fields = ('plan_name', 'plan_price', 'plan_duration','country', 'postcode', 'town_or_city', 'street_address1', 'street_address2', 'county', 'email')
+        fields = ['plan_name', 'plan_price', 'plan_duration', 'country', 'postcode', 'town_or_city', 'street_address1', 'street_address2', 'county', 'email']
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -69,7 +69,6 @@ class PaymentForm(forms.ModelForm):
             'email': 'Email'
         }
 
-        self.fields['email'].widget.attrs['readonly'] = True
         for field in self.fields:
             if field != 'country' and field != 'email':
                 if self.fields[field].required:

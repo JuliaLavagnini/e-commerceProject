@@ -44,6 +44,22 @@ if (document.getElementById('card-element')) {
     });
 }
 
+// Handle realtime validation errors on the card element
+card.addEventListener('change', function (event) {
+    var errorDiv = document.getElementById('card-errors');
+    if (event.error) {
+        var html = `
+            <span class="icon" role="alert">
+                <i class="fas fa-times"></i>
+            </span>
+            <span>${event.error.message}</span>
+        `;
+        $(errorDiv).html(html);
+    } else {
+        errorDiv.textContent = '';
+    }
+});
+
 // Handle form submit
 var form = document.getElementById('payment-form');
 
@@ -54,6 +70,16 @@ form.addEventListener('submit', function(ev) {
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
+            billing_details: {
+                email: $.trim(form.email.value),
+                address:{
+                    line1: $.trim(form.street_address1.value),
+                    line2: $.trim(form.street_address2.value),
+                    city: $.trim(form.town_or_city.value),
+                    country: $.trim(form.country.value),
+                    state: $.trim(form.county.value),
+                }
+            }
          }
     }).then(function(result) {
             if (result.error) {

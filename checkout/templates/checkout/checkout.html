@@ -21,22 +21,21 @@
         <div class="col-12">
             <form method="POST" id="payment-form" action="{% url 'checkout' %}">
                 {% csrf_token %}
-                    {% if user.is_authenticated %}
-                        <div class="card mx-5 shadow rounded" style="border-radius:50px;border:none">
-                            <div class="card-body">
-                                <h3 class="card-title font-weight-bold">Checkout</h3>
-                                <p class="text-muted small ">Enter card details.  Your subscription will start immediately</p>
-                                <div class="row">
-                                    <div class="col-6 text-muted">
-                                        <p class="my-0 mb-2"> Plan:</p> <!-- Plan Name -->
-                                        <p class="my-0">Total:</p> <!-- Plan Price -->
-                                    </div>
+                    <div class="card mx-5 shadow rounded" style="border-radius:50px;border:none">
+                        <div class="card-body">
+                            <h3 class="card-title font-weight-bold">Checkout</h3>
+                            <p class="text-muted small ">Enter card details.  Your subscription will start immediately</p>
+                            <div class="row">
+                                <div class="col-6 text-muted">
+                                    <p class="my-0 mb-2"> Plan:</p> <!-- Plan Name -->
+                                    <p class="my-0">Total:</p> <!-- Plan Price -->
+                                </div>
                                     <div class="col-6 text-right font-weight-bold">
-                                        <h5 class="my-0 mb-2"> {{ form.plan_name.value }}</h5> <!-- Plan Name -->
-                                        <h5 class="my-0"> £ {{ form.plan_price.value }} /{{ form.plan_duration.value }}</h5> <!-- Plan Price and duration -->
-                                        <input type="hidden" id="plan_name" value="{{ form.plan_name.value }}">
-                                        <input type="hidden" id="plan_price" value="{{ form.plan_price.value }}">
-                                        <input type="hidden" id="plan_duration" value="{{ form.plan_duration.value }}">
+                                        <h5 class="my-0 mb-2"> {{ form.initial.plan_name }}</h5> <!-- Plan Name -->
+                                        <h5 class="my-0"> £ {{ form.initial.plan_price }} /{{ form.initial.plan_duration }}</h5> <!-- Plan Price and duration -->
+                                        <input type="hidden" name="plan_name" value="{{ form.initial.plan_name }}">
+                                        <input type="hidden" name="plan_price" value="{{ form.initial.plan_price }}">
+                                        <input type="hidden" name="plan_duration" value="{{ form.initial.plan_duration }}">                                    
                                     </div>
                                 </div>
                                 <br>
@@ -49,7 +48,7 @@
                                     <div class="text-danger" id="card-errors" role="alert"></div>
                                     <!-- Pass the client secret to the view so we can get the payment intent id -->
                                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                                    <button id="submit submit-button" type="submit" class=" btn btn-primary w-100">
+                                    <button id="submit-button" class=" btn btn-primary w-100">
                                         <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
                                             <span class="sr-only">Loading...</span>
                                         </div>
@@ -57,12 +56,6 @@
                                     </button>
                                 </div>
                             </div>        
-                    {% else %}
-                        <label for="">
-                            <a href="{% url 'account_signup' %}" class="text-info">Create an account</a> or
-                            <a href="{% url 'account_login' %}" class="text-info">Login</a>
-                        </label>
-                    {% endif %}
             </form>
         </div>
         <div class="row"></div>
