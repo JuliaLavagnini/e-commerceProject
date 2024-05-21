@@ -2,6 +2,17 @@ html {
     height: 100%;
 }
 
+/* Ensure dropdown stays within screen limits */
+.navbar .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+  
+/* Adjust button spacing */
+.navbar .nav-link.main-logo-link {
+    margin-right: auto;
+}
+
 .home-page {
     background-image: url("/media/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg");
     background-size: cover;
