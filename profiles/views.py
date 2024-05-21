@@ -16,6 +16,7 @@ def profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile updated successfully')
+            return redirect('profile')
         else:
             messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
@@ -27,7 +28,6 @@ def profile(request):
     context = {
         'form': form,
         'payments': payments,
-        'on_profile_page': True
     }
 
     return render(request, template, context)

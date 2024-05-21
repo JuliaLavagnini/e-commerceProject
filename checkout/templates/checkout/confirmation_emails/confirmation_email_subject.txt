@@ -1,0 +1,1 @@
+Zing Gym Confirmation for purchase {{ payment.payment_reference }}

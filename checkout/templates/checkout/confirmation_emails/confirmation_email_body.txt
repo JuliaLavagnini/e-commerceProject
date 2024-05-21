@@ -1,0 +1,18 @@
+Hello {{ payment.user }}!
+
+This is a confirmation of your subscription at Zing Gym. Your purchase deatils is below:
+
+Payment Reference: {{ payment.payment_reference }}
+Payment Date: {{ payment.payment_date }}
+
+Plan: ${{ payment.plan_name }}
+Plan Duration: ${{ payment.plan_duration }}
+Total: ${{ payment.plan_price }}
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Sincerely,
+
+Zing Gym

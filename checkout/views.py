@@ -127,6 +127,12 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount=stripeTotal, 
             currency=settings.STRIPE_CURRENCY,
+            metadata={
+                'username': request.user.username,
+                'plan_name': plan_name,
+                'plan_price': str(plan_price),
+                'plan_duration': plan_duration,
+            },
         )
 
         print(intent)

@@ -8,7 +8,7 @@ from profiles.models import UserProfile
 
 import json
 import time
-
+import stripe
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -53,20 +53,17 @@ class StripeWH_Handler:
         plan_price = metadata.get('plan_price')
         plan_duration = metadata.get('plan_duration')
 
-        billing_details = intent.charges.data[0].billing_details
+        # Retrieve the Charge object
+        stripe_charge = stripe.Charge.retrieve(intent.latest_charge)
 
-        # Update profile information
+        billing_details = stripe_charge.billing_details  # Updated
+        grand_total = round(stripe_charge.amount / 100, 2)  # Updated
+
+        # Update profile information if save_info was checked
         profile = None
         username = metadata.get('username')
-        if username != 'AnonymousUser':
+        if username and username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
-            profile.default_country = billing_details.address.country
-            profile.default_postcode = billing_details.address.postal_code
-            profile.default_town_or_city = billing_details.address.city
-            profile.default_street_address1 = billing_details.address.line1
-            profile.default_street_address2 = billing_details.address.line2
-            profile.default_county = billing_details.address.state
-            profile.save()
 
         payment_exists = False
         attempt = 1
@@ -120,6 +117,7 @@ class StripeWH_Handler:
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
+        
         self._send_confirmation_email(payment)
         return HttpResponse(
             content=(f'Webhook received: {event["type"]} | SUCCESS: '
