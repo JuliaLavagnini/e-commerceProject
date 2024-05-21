@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
+from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib import messages
 from django.conf import settings
@@ -11,6 +13,24 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+@require_POST
+def cache_checkout_data(request):
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'plan_name': request.POST.get('plan_name'),
+            'plan_price': request.POST.get('plan_price'),
+            'plan_duration': request.POST.get('plan_duration'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, ('Sorry, your payment cannot be '
+                                 'processed right now. Please try '
+                                 'again later.'))
+        return HttpResponse(content=str(e), status=400)
+    
 @login_required
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
