@@ -1,1 +1,1 @@
-web: gunicorn zing-gym.wsgi:application --log-file - --log-level debug
+web:gunicorn zing-gym.wsgi:application
