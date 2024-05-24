@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-^qu!sveqfa-dm-zj*0)iqyy#q-5ssmg9ee*%yhynyg19zg0^)u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['zing-gym-516505ed627e.herokuapp.com', 'localhost']
 
 
 # Application definition
