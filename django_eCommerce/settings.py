@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['zing-gym-516505ed627e.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://zing-gym-django-48223353ee17.herokuapp.com/', 'localhost', '127.0.0.1']
 
 
 # Application definition
