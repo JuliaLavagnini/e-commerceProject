@@ -92,6 +92,7 @@
                     <p class="text-center mt-1 font-weight-bolder">Hello, {{ request.user.username }}!</p>
                     {% if request.user.is_superuser %}
                       <a href="{% url 'add_plan' %}" class="dropdown-item">Plan Management - Add Plan</a>
+                      <a href="{% url 'add_trainer' %}" class="dropdown-item">Staff Management - Add Staff</a>
                     {% endif %}
                     <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                     <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
