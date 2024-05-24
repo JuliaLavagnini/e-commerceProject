@@ -169,32 +169,38 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+USE_R2 = os.environ.get('USE_R2', False)
 
-if 'USE_R2' in os.environ:
-
-    # Bucket Config
+if USE_R2:
     R2_STORAGE_BUCKET_NAME = 'zing-gym-django'
     R2_ACCESS_KEY_ID = os.environ.get('R2_ACCESS_KEY_ID')
     R2_SECRET_ACCESS_KEY = os.environ.get('R2_SECRET_ACCESS_KEY')
-    R2_ENDPOINT_URL = 'https://2a9289dc0e3ad2f3ab67c3d94e9355fd.r2.cloudflarestorage.com/zing-gym-django'
+    R2_ENDPOINT_URL = f'https://{os.environ.get("R2_ACCOUNT_ID")}.r2.cloudflarestorage.com'
+    R2_CUSTOM_DOMAIN = f'{R2_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
+
 
     # Cache control headers
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',  # 1 day
     }
 
-    DEFAULT_FILE_STORAGE = 'custom_storages.StaticStorage'
-    STATICFILES_STORAGE = 'custom_storages.MediaStorage'
-    R2_CUSTOM_DOMAIN = f'{R2_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
+    # Static files (CSS, JavaScript, Images)
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    STATIC_URL = f'https://{R2_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
 
-    # Override static and media URLs in production
-    STATIC_URL = f'https://{R2_CUSTOM_DOMAIN}/static/'
-    MEDIA_URL = f'https://{R2_CUSTOM_DOMAIN}/media/'
+    # Media files
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = f'https://{R2_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+else:
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
+
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
