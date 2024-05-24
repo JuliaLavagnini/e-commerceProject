@@ -14,7 +14,7 @@ html {
 }
 
 .home-page {
-    background-image: url("/media/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg");
+    background-image: url("/static/background.jpg");
     background-size: cover;
     color: white;
 }
