@@ -1,1 +1,1 @@
-web: gunicorn zing-gym.wsgi:application
+web: gunicorn django_eCommerce.wsgi:application
