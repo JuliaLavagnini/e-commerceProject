@@ -1,0 +1,23 @@
+[
+    {
+      "model": "plans.plan",
+      "pk": 1,
+      "fields": {
+        "name": "Gym Plan",
+        "description": "Access to gym facilities",
+        "monthly_price": "28.00",
+        "yearly_price": "201.60"
+      }
+    },
+    {
+      "model": "plans.plan",
+      "pk": 2,
+      "fields": {
+        "name": "Gym & Trainer Plan",
+        "description": "Access to gym facilities and personal trainer sessions",
+        "monthly_price": "48.00",
+        "yearly_price": "345.60"
+      }
+    }
+  ]
+  

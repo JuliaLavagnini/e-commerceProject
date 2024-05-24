@@ -1,0 +1,87 @@
+[
+    {
+      "model": "trainers.trainer",
+      "pk": 1,
+      "fields": {
+        "name": "Jake",
+        "programs": "Men",
+        "availability": "morning",
+        "speciality": "Fisiotheraphy",
+        "sessions": "full_time",
+        "image": "/media/trainer_images/jake.jpg"
+      }
+    },
+    {
+      "model": "trainers.trainer",
+      "pk": 2,
+      "fields": {
+        "name": "Tory",
+        "programs": "Women",
+        "availability": "afternoon",
+        "speciality": "Pragnance",
+        "sessions": "half_time",
+        "image": "/media/trainer_images/tory.jpg"
+      }
+    },
+    {
+      "model": "trainers.trainer",
+      "pk": 3,
+      "fields": {
+        "name": "Lisa",
+        "programs": "Women",
+        "availability": "morning",
+        "speciality": "Accessibility",
+        "sessions": "full_time",
+        "image": "/media/trainer_images/lisa.jpg"
+      }
+    },
+    {
+      "model": "trainers.trainer",
+      "pk": 4,
+      "fields": {
+        "name": "Sophia",
+        "programs": "Women",
+        "availability": "evening",
+        "speciality": "Pragnance",
+        "sessions": "half_time",
+        "image": "/media/trainer_images/sophia.jpg"
+      }
+    },
+    {
+      "model": "trainers.trainer",
+      "pk": 5,
+      "fields": {
+        "name": "Jack",
+        "programs": "Men",
+        "availability": "all",
+        "speciality": "Accessibility",
+        "sessions": "full_time",
+        "image": "/media/trainer_images/jack.jpg"
+      }
+    },
+    {
+      "model": "trainers.trainer",
+      "pk": 6,
+      "fields": {
+        "name": "Ava",
+        "programs": "Women",
+        "availability": "all",
+        "speciality": "Fisiotheraphy",
+        "sessions": "half_time",
+        "image": "/media/trainer_images/ava.jpg"
+      }
+    },
+    {
+      "model": "trainers.trainer",
+      "pk": 7,
+      "fields": {
+        "name": "Michael",
+        "programs": "Men",
+        "availability": "all",
+        "speciality": "Pragnance",
+        "sessions": "full_time",
+        "image": "/media/trainer_images/michael.jpg"
+      }
+    }
+  ]
+  
