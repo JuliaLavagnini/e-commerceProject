@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from decouple import config
 from pathlib import Path
 import os
+from os import getenv
+from dotenv import load_dotenv
 from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -117,13 +119,21 @@ WSGI_APPLICATION = 'django_eCommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+# Replace the DATABASES section of your settings.py with this
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': getenv('PGDATABASE'),
+    'USER': getenv('PGUSER'),
+    'PASSWORD': getenv('PGPASSWORD'),
+    'HOST': getenv('PGHOST'),
+    'PORT': getenv('PGPORT', 5432),
+    'OPTIONS': {
+      'sslmode': 'require',
+    },
+  }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

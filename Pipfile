@@ -13,6 +13,8 @@ python-dotenv = "*"
 python-decouple = "==3.6"
 django-countries = "*"
 crispy-bootstrap4 = "*"
+psycopg2-binary = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
