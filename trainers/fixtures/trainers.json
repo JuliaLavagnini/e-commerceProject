@@ -8,7 +8,7 @@
         "availability": "morning",
         "speciality": "Fisiotheraphy",
         "sessions": "full_time",
-        "image": "/media/trainer_images/jake.jpg"
+        "image": "/media/jake.jpg"
       }
     },
     {
@@ -20,7 +20,7 @@
         "availability": "afternoon",
         "speciality": "Pragnance",
         "sessions": "half_time",
-        "image": "/media/trainer_images/tory.jpg"
+        "image": "/media/tory.jpg"
       }
     },
     {
@@ -32,7 +32,7 @@
         "availability": "morning",
         "speciality": "Accessibility",
         "sessions": "full_time",
-        "image": "/media/trainer_images/lisa.jpg"
+        "image": "/media/lisa.jpg"
       }
     },
     {
@@ -44,7 +44,7 @@
         "availability": "evening",
         "speciality": "Pragnance",
         "sessions": "half_time",
-        "image": "/media/trainer_images/sophia.jpg"
+        "image": "/media/sophia.jpg"
       }
     },
     {
@@ -56,7 +56,7 @@
         "availability": "all",
         "speciality": "Accessibility",
         "sessions": "full_time",
-        "image": "/media/trainer_images/jack.jpg"
+        "image": "/media/jack.jpg"
       }
     },
     {
@@ -68,7 +68,7 @@
         "availability": "all",
         "speciality": "Fisiotheraphy",
         "sessions": "half_time",
-        "image": "/media/trainer_images/ava.jpg"
+        "image": "/media/ava.jpg"
       }
     },
     {
@@ -80,7 +80,7 @@
         "availability": "all",
         "speciality": "Pragnance",
         "sessions": "full_time",
-        "image": "/media/trainer_images/michael.jpg"
+        "image": "/media/michael.jpg"
       }
     }
   ]
