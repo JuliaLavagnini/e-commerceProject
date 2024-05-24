@@ -1,1 +1,1 @@
-web: gunicorn e-commerceProject.wsgi
+web: gunicorn zing-gym.wsgi:application --log-file - --log-level debug
