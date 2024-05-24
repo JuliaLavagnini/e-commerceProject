@@ -1,1 +1,1 @@
-web:gunicorn zing-gym.wsgi
+web: gunicorn zing-gym.wsgi:application
