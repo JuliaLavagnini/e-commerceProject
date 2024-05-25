@@ -174,8 +174,8 @@ if os.environ.get('USE_R2'):
     R2_ACCESS_KEY_ID = os.environ.get('R2_ACCESS_KEY_ID')
     R2_SECRET_ACCESS_KEY = os.environ.get('R2_SECRET_ACCESS_KEY')
     R2_STORAGE_BUCKET_NAME = config('R2_BUCKET_NAME')
-    R2_S3_ENDPOINT_URL = f'https://{os.environ.get("R2_ACCOUNT_ID")}.r2.cloudflarestorage.com'
-    R2_S3_CUSTOM_DOMAIN = f'{R2_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
+    R2_ENDPOINT_URL = f'https://{os.environ.get("R2_ACCOUNT_ID")}.r2.cloudflarestorage.com'
+    R2_CUSTOM_DOMAIN = f'{R2_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
 
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
