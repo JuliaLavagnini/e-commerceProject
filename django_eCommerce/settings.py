@@ -169,18 +169,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if os.environ.get('USE_R2'):
-    AWS_ACCESS_KEY_ID = os.environ.get('R2_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('R2_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = config('R2_BUCKET_NAME')
-    AWS_S3_ENDPOINT_URL = f'https://{os.environ.get("R2_ACCOUNT_ID")}.r2.cloudflarestorage.com'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
+    R2_ACCESS_KEY_ID = os.environ.get('R2_ACCESS_KEY_ID')
+    R2_SECRET_ACCESS_KEY = os.environ.get('R2_SECRET_ACCESS_KEY')
+    R2_STORAGE_BUCKET_NAME = config('R2_BUCKET_NAME')
+    R2_S3_ENDPOINT_URL = f'https://{os.environ.get("R2_ACCOUNT_ID")}.r2.cloudflarestorage.com'
+    R2_S3_CUSTOM_DOMAIN = f'{R2_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
 
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
@@ -188,12 +183,14 @@ if os.environ.get('USE_R2'):
 
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     STATICFILES_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    STATIC_URL = f'https://{R2_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
 
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
     MEDIAFILES_LOCATION = 'media'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
-
+    MEDIA_URL = f'https://{R2_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+else: 
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
