@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['zing-gym-django-48223353ee17.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['zing-gym.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -172,7 +172,7 @@ if os.environ.get('USE_R2'):
     AWS_ACCESS_KEY_ID = os.environ.get('R2_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('R2_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('R2_BUCKET_NAME')
-    AWS_S3_ENDPOINT_URL = f'https://{os.environ.get("R2_ACCOUNT_ID")}.r2.cloudflarestorage.com'
+    AWS_S3_ENDPOINT_URL = f'https://{os.environ.get("R2_ACCOUNT_ID")}.r2.cloudflarestorage.com/zing-gym-django'
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.r2.cloudflarestorage.com'
 
     # Cache control headers
