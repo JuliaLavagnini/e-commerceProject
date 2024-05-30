@@ -15,7 +15,7 @@ All media content was hold all rights reserved, to Unsplash.
 
 **Wireframes**
 
-![Wireframes of all pages](<static/documentation-media/task management web app.png>)
+![Wireframes of all pages](</static/media/Frame 1.png>)
 
 **Accessibility**
 
