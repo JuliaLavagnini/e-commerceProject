@@ -11,12 +11,14 @@ def profile(request):
     """ Display the user's profile. """
     profile, created = UserProfile.objects.get_or_create(user=request.user)
 
+    order_satus = None 
+
     if request.method == 'POST':
         if 'cancel_payment' in request.POST:  # Check if the cancel button was clicked
             payment_reference = request.POST.get('payment_reference')
-            order = Payment.objects.get(payment_reference=payment_reference)
-            order.status = 'Cancelled'
-            order.save()
+            order_satus = Payment.objects.get(payment_reference=payment_reference)
+            order_satus.status = 'Cancelled'
+            order_satus.save()
             messages.success(request, 'Payment cancelled successfully')
             return redirect('profile')
         else:
@@ -34,7 +36,7 @@ def profile(request):
 
     template = 'profile/profile.html'
     context = {
-        'order': order,
+        'order_status': order_satus,
         'form': form,
         'payments': payments,
     }
