@@ -13,8 +13,6 @@ This Django e-commerce project is an online platform for purchasing gym membersh
 
 **Target Audience**
 
-## Target Audience
-
 Zing gym is designed to cater to a diverse range of users, chidren to elders, and genders with flexible schedules to accommodate early morning, daytime, and late-night workouts. To provide specialized programs such as sessions for pregnant individuals, physiotherapy, and accessibility for those with disabilities.
 
 **Imagery**
