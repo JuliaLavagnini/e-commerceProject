@@ -40,7 +40,7 @@ class Trainer(models.Model):
     availability = models.CharField(max_length=50, choices=AVAILABILITY_CHOICES, default=ALL)
     speciality = models.CharField(max_length=50, choices=SPECIALLITY_CHOICES, default=ALL)
     sessions = models.CharField(max_length=50, choices=SESSION_CHOICES, default=ALL)
-    image = models.ImageField(upload_to='media', default=ALL)
+    image = models.ImageField(default=ALL)
 
 
     def __str__(self):
