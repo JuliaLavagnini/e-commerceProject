@@ -14,9 +14,9 @@ def profile(request):
     if request.method == 'POST':
         if 'cancel_payment' in request.POST:  # Check if the cancel button was clicked
             payment_reference = request.POST.get('payment_reference')
-            payment = Payment.objects.get(payment_reference=payment_reference)
-            payment.status = 'Cancelled'
-            payment.save()
+            order = Payment.objects.get(payment_reference=payment_reference)
+            order.status = 'Cancelled'
+            order.save()
             messages.success(request, 'Payment cancelled successfully')
             return redirect('profile')
         else:
@@ -34,7 +34,7 @@ def profile(request):
 
     template = 'profile/profile.html'
     context = {
-        'payment': payment,
+        'payment': order,
         'form': form,
         'payments': payments,
     }
