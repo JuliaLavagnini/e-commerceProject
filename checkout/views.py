@@ -164,3 +164,12 @@ def checkout_success(request, payment_reference):
     print("Payment Reference:", payment_reference)
 
     return render(request, 'checkout/checkout_success.html', {'payment': payment})
+
+@login_required
+def cancel_membership(request, payment_reference):
+    payment = get_object_or_404(Payment, payment_reference=payment_reference, user=request.user)
+    if request.method == 'POST':
+        payment.status = False  # Update the status to cancelled
+        payment.save()
+        messages.success(request, 'Your membership has been cancelled.')
+    return redirect('profile') 

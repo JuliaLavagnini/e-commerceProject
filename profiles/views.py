@@ -35,11 +35,6 @@ def profile(request):
 def purchase_history(request, payment_reference):
     order = get_object_or_404(Payment, payment_reference=payment_reference)
 
-    messages.info(request, (
-        f'This is a past confirmation for order number {payment_reference}. '
-        'A confirmation email was sent on the order date.'
-    ))
-
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
