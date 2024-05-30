@@ -48,6 +48,15 @@ def purchase_history(request, payment_reference):
 
     return render(request, template, context)
 
+@login_required
+def cancel_membership(request, payment_reference):
+    order = get_object_or_404(Payment, payment_reference=payment_reference, user=request.user)
+    if request.method == 'POST':
+        order.active = False
+        order.save()
+        messages.success(request, 'Your membership has been cancelled.')
+    return redirect('profile')
+
 def update_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=request.user.userprofile)

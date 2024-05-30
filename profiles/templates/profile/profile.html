@@ -47,17 +47,24 @@
         <hr>
         <h2>Purchase History</h2>
         <div class="row">
-            <div class="col-6 col-lg-6 mt-3">
+            <div class="col-12 col-lg-12 mt-3">
                 {% for payment in payments %}
                 <div class="card">
                     <div class="card-header">
                         <h3># {{ payment.payment_reference }}</h3>
                     </div>
                     <div class="card-body">
+                        <small>{{ "Active" if payment.active else "Cancelled" }}</small>
                         <p><strong>Plan:</strong> {{ payment.plan_name }}</p>
                         <p><strong>Price:</strong> {{ payment.plan_price }}</p>
                         <p><strong>Duration:</strong> {{ payment.plan_duration }}</p>
                         <p><strong>Purchase Date:</strong> {{ payment.payment_date }}</p>
+                        {% if purchase.active %}
+                        <form method="post" action="{% url 'cancel_membership' payment.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Cancel</button>
+                        </form>
+                        {% endif %}
                     </div>
                 </div>
                 {% empty %}
