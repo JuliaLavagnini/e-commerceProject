@@ -12,7 +12,6 @@ class Payment(models.Model):
     plan_duration = models.CharField(max_length=20)
     payment_date = models.DateTimeField(default=timezone.now)
     payment_reference = models.CharField(max_length=32, null=False, editable=False)
-    status =  models.BooleanField(default=True)
     
     email = models.EmailField(null=True, blank=True)
     country = CountryField(blank_label='Country', null=False, blank=False)
