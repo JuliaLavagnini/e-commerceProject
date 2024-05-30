@@ -12,16 +12,24 @@ def profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Profile updated successfully')
+        if 'cancel_payment' in request.POST:  # Check if the cancel button was clicked
+            payment_reference = request.POST.get('payment_reference')
+            payment = Payment.objects.get(payment_reference=payment_reference)
+            payment.status = 'cancelled'
+            payment.save()
+            messages.success(request, 'Payment cancelled successfully')
             return redirect('profile')
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')
+            form = UserProfileForm(request.POST, instance=profile)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Profile updated successfully')
+                return redirect('profile')
+            else:
+                messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile, initial={'username': request.user.username})
-    
+
     payments = Payment.objects.filter(user=request.user).order_by('-payment_date')
 
     template = 'profile/profile.html'

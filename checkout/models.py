@@ -12,7 +12,7 @@ class Payment(models.Model):
     plan_duration = models.CharField(max_length=20)
     payment_date = models.DateTimeField(default=timezone.now)
     payment_reference = models.CharField(max_length=32, null=False, editable=False)
-    status = models.BooleanField(default=True)
+    status = models.CharField(max_length=10, default='active')
     
     email = models.EmailField(null=True, blank=True)
     country = CountryField(blank_label='Country', null=False, blank=False)
@@ -38,4 +38,4 @@ class Payment(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Payment #{self.payment_reference} - {self.user.username} - {self.plan_name}"
+        return f"Payment #{self.payment_reference} - {self.user.username} - {self.plan_name} - {self.status}"

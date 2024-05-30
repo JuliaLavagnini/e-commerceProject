@@ -54,23 +54,18 @@
                         <h3># {{ payment.payment_reference }}</h3>
                     </div>
                     <div class="card-body">
-                        <small>
-                            {% if payment.status %}
-                                Active
-                            {% else %}
-                                Cancelled
-                            {% endif %}
+                        <small class="border rounded-pill">
+                            <strong>{{ payment.status }}</strong>
                         </small>
                         <p><strong>Plan:</strong> {{ payment.plan_name }}</p>
                         <p><strong>Price:</strong> {{ payment.plan_price }}</p>
                         <p><strong>Duration:</strong> {{ payment.plan_duration }}</p>
                         <p><strong>Purchase Date:</strong> {{ payment.payment_date }}</p>
-                        {% if payment.status %}
-                            <form method="post" action="{% url 'cancel_membership' payment.payment_reference %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Cancel</button>
-                            </form>
-                            {% endif %}
+                        <form method="post" action="{% url 'profile' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="payment_reference" value="{{ payment.payment_reference }}">
+                            <button type="submit">Cancel</button>
+                        </form>
                     </div>
                 </div>
                 {% empty %}
