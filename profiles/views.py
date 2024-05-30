@@ -34,6 +34,7 @@ def profile(request):
 
     template = 'profile/profile.html'
     context = {
+        'payment': payment,
         'form': form,
         'payments': payments,
     }
