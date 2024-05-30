@@ -51,10 +51,12 @@ def purchase_history(request, payment_reference):
 @login_required
 def cancel_membership(request, payment_reference):
     order = get_object_or_404(Payment, payment_reference=payment_reference, user=request.user)
+
     if request.method == 'POST':
-        order.active = False
+        order.status = False
         order.save()
         messages.success(request, 'Your membership has been cancelled.')
+
     return redirect('profile')
 
 def update_profile(request):
