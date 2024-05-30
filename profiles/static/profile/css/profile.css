@@ -30,8 +30,9 @@
 .text-border {
     display: inline-block;
     padding: 0 5px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     line-height: 1.5;
+    border: 1px solid black;
   }
 
 @media (max-width: 768px) {
