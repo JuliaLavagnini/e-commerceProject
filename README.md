@@ -1,13 +1,21 @@
 # E-Commerce
 
+[View Zing Gym website on Heroku](https://zing-gym-django-48223353ee17.herokuapp.com)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/JuliaLavagnini/e-commerceProject?color=red)
+![GitHub contributors](https://img.shields.io/github/contributors/JuliaLavagnini/e-commerceProject?color=orange)
+![GitHub language count](https://img.shields.io/github/languages/count/JuliaLavagnini/e-commerceProject?color=yellow)
+![GitHub top language](https://img.shields.io/github/languages/top/JuliaLavagnini/e-commerceProject?color=green)
+
 This Django e-commerce project is an online platform for purchasing gym memberships and training plans. It allows users to browse, purchase, and manage their subscriptions, and includes features for user authentication, profile management, and payment processing.
-Zing Gym is a web application designed to integrate fitness into daily life, offering users access to a variety of trainers, plans, and pricing options. Users can join, register, and log in to customize their fitness experience.
 
 ## Deign process
 
 **Target Audience**
 
-Zing gym welcomes everyone of all ages and genders, offering flexible hours and special sessions for pregnant individuals, physiotherapy, and accessibility.
+## Target Audience
+
+Zing gym is designed to cater to a diverse range of users, chidren to elders, and genders with flexible schedules to accommodate early morning, daytime, and late-night workouts. To provide specialized programs such as sessions for pregnant individuals, physiotherapy, and accessibility for those with disabilities.
 
 **Imagery**
 
