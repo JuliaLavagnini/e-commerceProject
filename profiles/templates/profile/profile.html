@@ -54,9 +54,11 @@
                         <h3># {{ payment.payment_reference }}</h3>
                     </div>
                     <div class="card-body">
-                        <small class="text-border">
-                            <strong>{{ payment.status }}</strong>
-                        </small>
+                        <div>
+                            <small class="border rounded-pill text-border m-1">
+                                <strong>{{ payment.status }}</strong>
+                            </small>
+                        </div>
                         <p><strong>Plan:</strong> {{ payment.plan_name }}</p>
                         <p><strong>Price:</strong> {{ payment.plan_price }}</p>
                         <p><strong>Duration:</strong> {{ payment.plan_duration }}</p>
