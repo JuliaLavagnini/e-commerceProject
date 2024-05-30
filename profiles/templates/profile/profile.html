@@ -60,7 +60,7 @@
                         <p><strong>Duration:</strong> {{ payment.plan_duration }}</p>
                         <p><strong>Purchase Date:</strong> {{ payment.payment_date }}</p>
                         {% if purchase.active %}
-                        <form method="post" action="{% url 'cancel_membership' payment.id %}">
+                        <form method="post" action="{% url 'cancel_membership' payment_reference %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger">Cancel</button>
                         </form>
