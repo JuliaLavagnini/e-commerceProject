@@ -15,7 +15,7 @@ def profile(request):
         if 'cancel_payment' in request.POST:  # Check if the cancel button was clicked
             payment_reference = request.POST.get('payment_reference')
             payment = Payment.objects.get(payment_reference=payment_reference)
-            payment.status = 'cancelled'
+            payment.status = 'Cancelled'
             payment.save()
             messages.success(request, 'Payment cancelled successfully')
             return redirect('profile')
