@@ -169,10 +169,10 @@ USE_TZ = True
 if 'USE_AWS' in os.environ:
     AWS_ACCESS_KEY_ID = config('ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = config('SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = 'zing-gym-django-bucket'
+    AWS_STORAGE_BUCKET_NAME = 'zinggym-django'
     AWS_ACCOUNT_ID = os.environ.get('R2_ACCOUNT_ID', '')
-    AWS_S3_ENDPOINT_URL = 'https://2a9289dc0e3ad2f3ab67c3d94e9355fd.eu.r2.cloudflarestorage.com'
-    AWS_S3_REGION_NAME = 'EU'  # or specify the region if needed
+    AWS_S3_ENDPOINT_URL = 'https://2a9289dc0e3ad2f3ab67c3d94e9355fd.r2.cloudflarestorage.com'
+    AWS_S3_REGION_NAME = 'auto'
     AWS_S3_CUSTOM_DOMAIN = AWS_S3_ENDPOINT_URL.split("//")[1]
 
 # Static files (CSS, JavaScript, Images)
