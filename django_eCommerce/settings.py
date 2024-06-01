@@ -166,14 +166,13 @@ USE_TZ = True
 
 
 # Cloudflare R2 settings
-if 'USE_AWS' in os.environ:
-    AWS_ACCESS_KEY_ID = config('ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = config('SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = 'zinggym-django'
-    AWS_ACCOUNT_ID = os.environ.get('R2_ACCOUNT_ID', '')
-    AWS_S3_ENDPOINT_URL = 'https://2a9289dc0e3ad2f3ab67c3d94e9355fd.r2.cloudflarestorage.com'
-    AWS_S3_REGION_NAME = 'auto'
-    AWS_S3_CUSTOM_DOMAIN = AWS_S3_ENDPOINT_URL.split("//")[1]
+AWS_ACCESS_KEY_ID = config('ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'zing-gym-django'
+AWS_S3_ENDPOINT_URL = 'https://2a9289dc0e3ad2f3ab67c3d94e9355fd.r2.cloudflarestorage.com'
+AWS_S3_REGION_NAME = 'auto'
+AWS_S3_CUSTOM_DOMAIN = AWS_S3_ENDPOINT_URL.split("//")[1]
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
