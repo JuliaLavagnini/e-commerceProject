@@ -165,28 +165,34 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# Cloudflare R2 settings
+if 'USE_AWS' in os.environ:
+    AWS_ACCESS_KEY_ID = config('ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = 'zing-gym-django-bucket'
+    AWS_ACCOUNT_ID = os.environ.get('R2_ACCOUNT_ID', '')
+    AWS_S3_ENDPOINT_URL = 'https://2a9289dc0e3ad2f3ab67c3d94e9355fd.eu.r2.cloudflarestorage.com/zing-gym-django-bucket'
+    AWS_S3_REGION_NAME = 'EU'  # or specify the region if needed
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL.split("//")[1]}'
 
-# Common settings for static and media files
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Media files (Uploads)
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 if DEBUG:
-    STATICFILES_DIRS = [BASE_DIR / 'static']
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 else:
-    STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# WhiteNoise configuration
-if not DEBUG:
-    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # Stripe Configuration
 STRIPE_CURRENCY = 'usd'
