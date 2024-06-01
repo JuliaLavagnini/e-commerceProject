@@ -164,28 +164,30 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-# Cloudflare R2 settings
-AWS_ACCESS_KEY_ID = config('ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'zinggym-django'
-AWS_S3_ENDPOINT_URL = 'https://2a9289dc0e3ad2f3ab67c3d94e9355fd.r2.cloudflarestorage.com'
-AWS_S3_REGION_NAME = 'auto'
-AWS_S3_CUSTOM_DOMAIN = AWS_S3_ENDPOINT_URL.split("//")[1]
-AWS_S3_SIGNATURE_VERSION = 's3v4'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+if 'USE_AWS' in os.environ:
+    # Cloudflare R2 settings
+    AWS_ACCESS_KEY_ID = config('ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = 'zinggym-django'
+    AWS_S3_ENDPOINT_URL = 'https://2a9289dc0e3ad2f3ab67c3d94e9355fd.r2.cloudflarestorage.com'
+    AWS_S3_REGION_NAME = 'auto'
+    AWS_S3_CUSTOM_DOMAIN = AWS_S3_ENDPOINT_URL.split("//")[1]
+    AWS_S3_SIGNATURE_VERSION = 's3v4'
 
-# Media files (Uploads)
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # Static files (CSS, JavaScript, Images)
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
 
 # Default primary key field type
