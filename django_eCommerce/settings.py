@@ -183,6 +183,8 @@ if 'USE_AWS' in os.environ:
     # Override static and media URLs in production
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    STATICFILES_LOCATION = 'static'
+    MEDIA_LOCATION = 'media'
 
 
     # Static files (CSS, JavaScript, Images)
