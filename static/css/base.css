@@ -14,7 +14,7 @@ html {
 }
 
 .home-page {
-    background-image: url("/media/background.jpg");
+    background: url('/media/background.jpg') no-repeat center center fixed;;
     background-size: cover;
     color: white;
 }
