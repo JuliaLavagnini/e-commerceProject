@@ -23,15 +23,18 @@ def profile(request):
                 messages.error(request, 'Payment not found or you do not have permission to cancel this payment')
             return redirect('profile')
         else:
-            form = UserProfileForm(request.POST, instance=profile)
+            form = UserProfileForm(request.POST, instance=profile, user=request.user)
             if form.is_valid():
                 form.save()
+                request.user.username = form.cleaned_data['username']
+                request.user.email = form.cleaned_data['email']
+                request.user.save()
                 messages.success(request, 'Profile updated successfully')
                 return redirect('profile')
             else:
                 messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
-        form = UserProfileForm(instance=profile, initial={'username': request.user.username})
+        form = UserProfileForm(instance=profile, user=request.user)
 
     payments = Payment.objects.filter(user=request.user).order_by('-payment_date')
 

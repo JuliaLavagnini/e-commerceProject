@@ -63,11 +63,13 @@
                         <p><strong>Price:</strong> {{ payment.plan_price }}</p>
                         <p><strong>Duration:</strong> {{ payment.plan_duration }}</p>
                         <p><strong>Purchase Date:</strong> {{ payment.payment_date }}</p>
-                        <form method="post" action="{% url 'profile' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="payment_reference" value="{{ payment.payment_reference }}">
-                            <button type="submit" class="btn btn-danger">Cancel</button>
-                        </form>
+                        {% if payment.status != 'Cancelled' %}
+                            <form method="post" action="{% url 'profile' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="payment_reference" value="{{ payment.payment_reference }}">
+                                <button type="submit" class="btn btn-danger">Cancel</button>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>
                 {% empty %}
