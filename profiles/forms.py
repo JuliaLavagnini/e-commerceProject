@@ -13,7 +13,12 @@ class UserProfileForm(forms.ModelForm):
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Pop the 'user' argument if present
         super().__init__(*args, **kwargs)
+        if user:
+            self.fields['username'].initial = user.username
+            self.fields['email'].initial = user.email
+
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
