@@ -10,16 +10,17 @@ from checkout.models import Payment
 def profile(request):
     """ Display the user's profile. """
     profile, created = UserProfile.objects.get_or_create(user=request.user)
-
-    order_satus = None 
-
+    
     if request.method == 'POST':
-        if 'cancel_payment' in request.POST:  # Check if the cancel button was clicked
+        if 'payment_reference' in request.POST:  # Check if the cancel button was clicked
             payment_reference = request.POST.get('payment_reference')
-            order_satus = Payment.objects.get(payment_reference=payment_reference)
-            order_satus.status = 'Cancelled'
-            order_satus.save()
-            messages.success(request, 'Payment cancelled successfully')
+            try:
+                payment = Payment.objects.get(payment_reference=payment_reference, user=request.user)
+                payment.status = 'Cancelled'
+                payment.save()
+                messages.success(request, 'Payment cancelled successfully')
+            except Payment.DoesNotExist:
+                messages.error(request, 'Payment not found or you do not have permission to cancel this payment')
             return redirect('profile')
         else:
             form = UserProfileForm(request.POST, instance=profile)
@@ -36,7 +37,6 @@ def profile(request):
 
     template = 'profile/profile.html'
     context = {
-        'order_status': order_satus,
         'form': form,
         'payments': payments,
     }
