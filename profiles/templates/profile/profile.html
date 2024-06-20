@@ -38,8 +38,16 @@
             <div id="form-container" class="mt-4" style="display: none;">
               <form method="POST">
                 {% csrf_token %}
-                {% crispy form %}
-                <button type="submit" class="btn btn-dark text-uppercase float-center">Save Changes</button>
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {% if field.field.widget.is_hidden %}
+                    {{ field }}
+                    {% else %}
+                    {% render_field field readonly=True %}
+                    {% endif %}
+                </div>
+                {% endfor %}
               </form>
             </div>
           </div>
