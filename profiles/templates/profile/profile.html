@@ -42,9 +42,9 @@
                 <div class="form-group">
                     {{ field.label_tag }}
                     {% if field.field.widget.is_hidden %}
-                    {{ field }}
+                        {{ field }}
                     {% else %}
-                    {% render_field field readonly=True %}
+                        {% render_field field readonly=True %}
                     {% endif %}
                 </div>
                 {% endfor %}
