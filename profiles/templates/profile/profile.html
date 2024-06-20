@@ -44,7 +44,7 @@
                     {% if field.field.widget.is_hidden %}
                         {{ field }}
                     {% else %}
-                        {% render_field field readonly=True %}
+                        {{field|as_crispy_field }}
                     {% endif %}
                 </div>
                 {% endfor %}
