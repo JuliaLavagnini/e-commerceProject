@@ -77,7 +77,7 @@ class UserProfileForm(forms.ModelForm):
             'email': 'Email Address'
         }
 
-        disabled=['username', 'email']
+        disabled=['username', 'email','default_postcode', 'default_town_or_city', 'default_street_address1', 'default_street_address2', 'default_county', 'default_country']
         for field in disabled:
             self.fields[field].widget.attrs['disabled'] = True
             self.fields[field].label = False
