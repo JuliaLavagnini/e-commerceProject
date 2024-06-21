@@ -6,3 +6,5 @@ document.getElementById('edit-details-btn').addEventListener('click', function()
         formContainer.style.display = 'none';
     }
 });
+
+$('.read-only .form-control').prop("disabled", true);

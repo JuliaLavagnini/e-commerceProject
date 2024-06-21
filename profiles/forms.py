@@ -24,8 +24,7 @@ class UserProfileForm(forms.ModelForm):
             Row(
                 Column(
                     'username',
-                    css_class='form-group col-md-6 mb-0',
-                    readonly=True
+                    css_class='form-group col-md-6 mb-0 read-only',
                 ),
                 Column(
                     'email',
