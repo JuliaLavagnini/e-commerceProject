@@ -23,11 +23,9 @@ def profile(request):
                 messages.error(request, 'Payment not found or you do not have permission to cancel this payment')
             return redirect('profile')
         else:
-            # Instantiate the form with instance and readonly_fields
-            form = UserProfileForm(instance=profile, user=request.user, readonly_fields=['username', 'email'])
+            form = UserProfileForm(request.POST, instance=profile, user=request.user)
     else:
-        # Instantiate the form with instance and readonly_fields
-        form = UserProfileForm(instance=profile, user=request.user, readonly_fields=['username', 'email'])
+        form = UserProfileForm(instance=profile, user=request.user)
 
     payments = Payment.objects.filter(user=request.user).order_by('-payment_date')
 

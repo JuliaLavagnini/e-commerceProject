@@ -13,7 +13,6 @@ class UserProfileForm(forms.ModelForm):
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
-        readonly_fields = kwargs.pop('readonly_fields', [])  # Pop the 'readonly_fields' argument if present, default to empty list
         user = kwargs.pop('user', None)  # Pop the 'user' argument if present
         super().__init__(*args, **kwargs)
         if user:
@@ -25,7 +24,8 @@ class UserProfileForm(forms.ModelForm):
             Row(
                 Column(
                     'username',
-                    css_class='form-group col-md-6 mb-0'
+                    css_class='form-group col-md-6 mb-0',
+                    readonly=True
                 ),
                 Column(
                     'email',
