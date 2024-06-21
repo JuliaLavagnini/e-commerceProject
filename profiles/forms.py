@@ -13,6 +13,7 @@ class UserProfileForm(forms.ModelForm):
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
+        readonly_fields = kwargs.pop('readonly_fields', [])  # Pop the 'readonly_fields' argument if present, default to empty list
         user = kwargs.pop('user', None)  # Pop the 'user' argument if present
         super().__init__(*args, **kwargs)
         if user:
@@ -79,16 +80,18 @@ class UserProfileForm(forms.ModelForm):
 
         self.fields['default_postcode'].widget.attrs['autofocus'] = True
         for field in self.fields:
-            if field != 'default_country':
+            if field in readonly_fields:
+                self.fields[field].widget.attrs['readonly'] = True
+            else:
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = ('border-black '
-                                                        'rounded-0 '
-                                                        'profile-form-input')
-            self.fields[field].label = False
+                self.fields[field].widget.attrs['class'] = ('border-black '
+                                                            'rounded-0 '
+                                                            'profile-form-input')
+                self.fields[field].label = False
 
     def save(self, commit=True):
         profile = super().save(commit=False)
