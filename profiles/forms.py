@@ -77,17 +77,9 @@ class UserProfileForm(forms.ModelForm):
             'email': 'Email Address'
         }
 
-        self.fields['default_postcode'].widget.attrs['autofocus'] = True
-        for field in self.fields:
-            if field != 'default_country':
-                if self.fields[field].required:
-                    placeholder = f'{placeholders[field]} *'
-                else:
-                    placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = ('border-black '
-                                                        'rounded-0 '
-                                                        'profile-form-input')
+        disabled=['username', 'email']
+        for field in disabled:
+            self.fields[field].widget.attrs['disabled'] = True
             self.fields[field].label = False
 
     def save(self, commit=True):
