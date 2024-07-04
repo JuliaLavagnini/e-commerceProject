@@ -23,16 +23,9 @@ class Payment(models.Model):
     county = models.CharField(max_length=80, null=True, blank=True)
 
     def _generate_payment_reference(self):
-        """
-        Generate a random, unique payment reference using UUID
-        """
         return uuid.uuid4().hex.upper()
 
     def save(self, *args, **kwargs):
-        """
-        Override the original save method to set the payment reference
-        if it hasn't been set already.
-        """
         if not self.payment_reference:
             self.payment_reference = self._generate_payment_reference()
         super().save(*args, **kwargs)

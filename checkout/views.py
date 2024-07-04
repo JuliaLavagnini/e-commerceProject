@@ -36,7 +36,7 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    intent = None  # Initialize intent to None
+    intent = None 
 
     if request.method == 'POST':
         form_data = {
@@ -52,7 +52,7 @@ def checkout(request):
             'email': request.user.email,
         }
 
-        # Debugging: Log the form data
+
         print(f"Form Data: {form_data}")
 
         try:
@@ -70,7 +70,6 @@ def checkout(request):
             payment.user = request.user
             payment.save()
 
-            # Save the info to the user's profile
             profile, created = UserProfile.objects.get_or_create(user=request.user)
             profile.default_street_address1 = payment.street_address1
             profile.default_street_address2 = payment.street_address2
@@ -88,13 +87,11 @@ def checkout(request):
     else:
         profile, created = UserProfile.objects.get_or_create(user=request.user)
 
-        # Check if plan details are passed in the query parameters
         plan_id = request.GET.get('plan_id')
         plan_name = request.GET.get('plan_name')
         plan_price = request.GET.get('plan_price')
         plan_duration = request.GET.get('plan_duration')
 
-        # Debugging: Log the query parameters
         print(f"Query Params - plan_id: {plan_id}, plan_name: {plan_name}, plan_price: {plan_price}, plan_duration: {plan_duration}")
 
         if not plan_id or not plan_name or not plan_price or not plan_duration:
@@ -156,7 +153,6 @@ def checkout_success(request, payment_reference):
         return redirect('checkout')
     except Exception as e:
         messages.error(request, f"Error retrieving payment details: {e}")
-        # Log the exception for further investigation
         logger.error("Error retrieving payment details: %s", e)
         return redirect('checkout')
 
@@ -169,7 +165,7 @@ def checkout_success(request, payment_reference):
 def cancel_membership(request, payment_reference):
     payment = get_object_or_404(Payment, payment_reference=payment_reference, user=request.user)
     if request.method == 'POST':
-        payment.status = False  # Update the status to cancelled
+        payment.status = False
         payment.save()
         messages.success(request, 'Your membership has been cancelled.')
     return redirect('profile') 

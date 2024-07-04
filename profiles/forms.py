@@ -13,7 +13,7 @@ class UserProfileForm(forms.ModelForm):
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  # Pop the 'user' argument if present
+        user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         if user:
             self.fields['username'].initial = user.username

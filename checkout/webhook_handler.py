@@ -11,7 +11,6 @@ import time
 import stripe
 
 class StripeWH_Handler:
-    """Handle Stripe webhooks"""
 
     def __init__(self, request):
         self.request = request
@@ -34,17 +33,11 @@ class StripeWH_Handler:
         )
 
     def handle_event(self, event):
-        """
-        Handle a generic/unknown/unexpected webhook event
-        """
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}',
             status=200)
 
     def handle_payment_intent_succeeded(self, event):
-        """
-        Handle the payment_intent.succeeded webhook from Stripe
-        """
         intent = event.data.object
         pid = intent.id
 
@@ -53,13 +46,11 @@ class StripeWH_Handler:
         plan_price = metadata.get('plan_price')
         plan_duration = metadata.get('plan_duration')
 
-        # Retrieve the Charge object
         stripe_charge = stripe.Charge.retrieve(intent.latest_charge)
 
-        billing_details = stripe_charge.billing_details  # Updated
-        grand_total = round(stripe_charge.amount / 100, 2)  # Updated
+        billing_details = stripe_charge.billing_details
+        grand_total = round(stripe_charge.amount / 100, 2) 
 
-        # Update profile information if save_info was checked
         profile = None
         username = metadata.get('username')
         if username and username != 'AnonymousUser':
@@ -125,9 +116,6 @@ class StripeWH_Handler:
             status=200)
 
     def handle_payment_intent_payment_failed(self, event):
-        """
-        Handle the payment_intent.payment_failed webhook from Stripe
-        """
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)

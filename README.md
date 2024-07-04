@@ -21,7 +21,7 @@ All media content was hold all rights reserved, to Unsplash.
 
 **Wireframes**
 
-![Wireframes of all pages](</static/media/Frame 1.png>)
+![Wireframes of all pages](</media/documentation_images/Frame 1.png>)
 
 **Accessibility**
 

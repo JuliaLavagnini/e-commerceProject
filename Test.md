@@ -14,10 +14,24 @@
 |Purchase History display on user profile|Yes|Yes|Yes|Yes|Yes|
 
 ### Security Measures 
-All pages are secured that only admin users can acess the data stored as '@login_required' is added before each implementation on the views files. Also, with a user tries to access the admin data by the url the system identify with the user has the credentials for it. 
+- All pages are secured that only admin users can acess the data stored as '@login_required' is added before each implementation on the views files. 
+![alt text](<media/documentation_images/Screenshot 2024-07-04 134951.png>)
+![alt text](<media/documentation_images/Screenshot 2024-07-04 163011.png>)
+![alt text](<media/documentation_images/Screenshot 2024-07-04 163100.png>)
 
-Finally, only admin users has additionals functionalities on th toggle menu.
+- If a user tries to access the admin data by the url the system identify with the user has the credentials for it. 
+![gif](media/documentation_images/ezgif-1-5b9c693f40.gif)
+![gif](media/documentation_images/ezgif-3-19ae2f6592.gif)
+
+- Users must login to access some pages.
+![gif](</media/documentation_images/user-need-login.gif>)
+![gif](</media/documentation_images/ezgif-1-06f995a295.gif>)
+
+- Only admin users has additionals functionalities on th toggle menu.
 ![Admin Menu](</media/documentation_images/Screenshot 2024-06-21 022526.png>)
+
+## Broken links 
+The final deployment is free of broken links as in other version the trainers checkout page did not load and broke shwoing error 504.
 
 ## Solved Bugs
 

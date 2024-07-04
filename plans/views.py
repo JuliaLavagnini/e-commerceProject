@@ -7,7 +7,6 @@ from django.db.models.functions import Lower
 from .models import Plan
 from .forms import PlanForm
 
-# Create your views here.
 def plans(request):
     plans = Plan.objects.all()
     return render(request, 'plans/plans.html', {'plans': plans})
