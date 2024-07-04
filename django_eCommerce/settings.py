@@ -203,13 +203,6 @@ STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
 STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
 DEFAULT_FROM_EMAIL = 'zing-gym.example.com'
 
-MESSAGE_TAGS = {
-    messages.DEBUG: 'debug',
-    messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'danger',
-}
 
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
