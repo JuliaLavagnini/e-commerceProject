@@ -110,5 +110,5 @@ Look for the Tests.md file
 
 * To clone, click to 'Code' green button (top right corner) and select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory. Type 'git clone' into the terminal and then paste the link you copied.
 
-## Video
+## Final Project
 ![gif](media/documentation_images/ezgif-2-fcdf9ff957.gif)
